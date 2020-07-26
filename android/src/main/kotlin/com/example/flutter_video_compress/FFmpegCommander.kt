@@ -141,7 +141,9 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
         if ("Duration" in message) {
             val reg = Regex("""Duration: ((\d{2}:){2}\d{2}\.\d{2}).*""")
             val totalTimeStr = message.replace(reg, "$1")
-            totalTime = utility.timeStrToTimestamp(totalTimeStr.trim())
+            val totalTime = utility.timeStrToTimestamp(totalTimeStr.trim())
+            MethodChannel(messenger, channelName).invokeMethod(
+                    "updateProgressTotalTime", totalTime)
         }
 
         if ("frame=" in message) {
@@ -150,7 +152,7 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
                 val totalTimeStr = message.replace(reg, "$1")
                 val time = utility.timeStrToTimestamp(totalTimeStr.trim())
                 MethodChannel(messenger, channelName)
-                        .invokeMethod("updateProgress", ((time / totalTime) * 100).toString())
+                        .invokeMethod("updateProgressTime", time)
             } catch (e: Exception) {
                 print(e.stackTrace)
             }
