@@ -13,12 +13,21 @@ class FlutterVideoCompress {
 
   bool _isCompressing = false;
 
+  int _totalTime = 0;
+
   FlutterVideoCompress._() {
     _channel.setMethodCallHandler(_handleCallback);
   }
 
   Future<void> _handleCallback(MethodCall call) async {
     switch (call.method) {
+      case 'updateProgressTotalTime':
+        _totalTime = call.arguments;
+        break;
+      case 'updateProgressTime':
+        final progress = (call.arguments as int) / _totalTime * 100;
+        _updateProgressState(progress);
+        break;
       case 'updateProgress':
         final progress = double.tryParse(call.arguments);
         _updateProgressState(progress);
@@ -205,6 +214,7 @@ class FlutterVideoCompress {
       'frameRate': frameRate,
     });
     _isCompressing = false;
+    _totalTime = 0;
     final jsonMap = json.decode(jsonStr);
     return MediaInfo.fromJson(jsonMap);
   }
