@@ -6,6 +6,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
@@ -42,6 +43,6 @@ android {
 
 dependencies {
     //implementation 'nl.bravobit:android-ffmpeg:1.1.7'
-    implementation 'com.github.pranavkpr1:FFmpeg-Android:master-SNAPSHOT'
+    implementation 'com.github.pranavkpr1:FFmpeg-Android:-SNAPSHOT'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
