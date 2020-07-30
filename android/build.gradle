@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    implementation 'nl.bravobit:android-ffmpeg:1.1.7'
-    //implementation 'com.github.pranavkpr1:FFmpeg-Android-latest:master-SNAPSHOT'
+    //implementation 'nl.bravobit:android-ffmpeg:1.1.7'
+    implementation 'com.github.pranavkpr1:FFmpeg-Android-latest:master-SNAPSHOT'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
