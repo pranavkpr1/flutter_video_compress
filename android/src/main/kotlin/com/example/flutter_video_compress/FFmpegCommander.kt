@@ -70,12 +70,13 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
 
                         if (stopCommand) {
                             print("FlutterVideoCompress: Video compression has stopped")
+                            ffTask?.killRunningProcess()
                             stopCommand = false
                             val json = utility.getMediaInfoJson(context, path)
                             json.put("isCancel", true)
                             result.success(json.toString())
                             totalTime = 0
-                            ffTask?.killRunningProcess()
+
                         }
                     }
 
