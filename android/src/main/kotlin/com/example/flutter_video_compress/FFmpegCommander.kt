@@ -35,7 +35,7 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
         utility.deleteFile(file)
 
         val scale = quality.getScaleString()
-        val cmdArray = mutableListOf( "-i", path, "-vcodec", "h264", "-crf", "24",  "-vf", "scale=$scale:-2", "-preset:v", "ultrafast")
+        val cmdArray = mutableListOf("-noautorotate", "-i", path, "-vcodec", "h264", "-crf", "24", "-movflags", "+faststart", "-vf", "scale=$scale:-2", "-preset:v", "ultrafast", "-b:v", "1000k")
 
         // Add high bitrate for the highest quality
 //        if (quality.isHighQuality()) {
