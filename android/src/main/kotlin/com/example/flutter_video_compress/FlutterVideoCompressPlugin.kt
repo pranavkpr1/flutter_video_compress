@@ -46,6 +46,7 @@ class FlutterVideoCompressPlugin : MethodCallHandler {
             }
             "compressVideo" -> {
                 val path = call.argument<String>("path")!!
+                val command = call.argument<String>("command")!!
                 val quality = call.argument<Int>("quality")!!
                 val deleteOrigin = call.argument<Boolean>("deleteOrigin")!!
                 val startTime = call.argument<Int>("startTime")
@@ -53,7 +54,7 @@ class FlutterVideoCompressPlugin : MethodCallHandler {
                 val includeAudio = call.argument<Boolean>("includeAudio")
                 val frameRate = call.argument<Int>("frameRate")
 
-                ffmpegCommander?.compressVideo(path, VideoQuality.from(quality), deleteOrigin,
+                ffmpegCommander?.compressVideo(path, command,VideoQuality.from(quality), deleteOrigin,
                         startTime, duration, includeAudio, frameRate, result, reg.messenger())
             }
             "cancelCompression" -> {

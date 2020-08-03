@@ -36,11 +36,12 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
 
         val scale = quality.getScaleString()
 
-        List<String> initialCommandArray=command.split(" ")
+        val csCommand: CharSequence = command
+        List<String> initialCommandArray = csCommand.split(" ")
 
         //val cmdArray = mutableListOf("-noautorotate", "-i", path, "-vcodec", "h264", "-crf", "24", "-movflags", "+faststart", "-vf", "scale=$scale:-2", "-preset:v", "ultrafast")
 
-        val cmdArray = mutableListOf( "-i", path)
+        val cmdArray = mutableListOf("-i", path)
         cmdArray.addAll(initialCommandArray)
 
         // Add high bitrate for the highest quality
