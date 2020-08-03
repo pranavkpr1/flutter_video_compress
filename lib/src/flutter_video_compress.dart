@@ -185,7 +185,7 @@ class FlutterVideoCompress {
   /// debugPrint(info.toJson());
   /// ```
   Future<MediaInfo> compressVideo(
-    String path, {
+    String path, String command,{
     VideoQuality quality = VideoQuality.DefaultQuality,
     bool deleteOrigin = false,
     int startTime,
@@ -206,6 +206,7 @@ class FlutterVideoCompress {
     }
     final jsonStr = await _invoke<String>('compressVideo', {
       'path': path,
+      'command':command,
       'quality': quality.index,
       'deleteOrigin': deleteOrigin,
       'startTime': startTime,

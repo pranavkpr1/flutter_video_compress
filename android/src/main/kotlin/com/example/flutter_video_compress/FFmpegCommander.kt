@@ -15,7 +15,7 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
     private var totalTime: Long = 0
 
 
-    fun compressVideo(path: String, quality: VideoQuality, deleteOrigin: Boolean,
+    fun compressVideo(path: String, command:String, quality: VideoQuality, deleteOrigin: Boolean,
                       startTime: Int?, duration: Int? = null, includeAudio: Boolean?,
                       frameRate: Int?, result: MethodChannel.Result,
                       messenger: BinaryMessenger) {
@@ -35,7 +35,13 @@ class FFmpegCommander(private val context: Context, private val channelName: Str
         utility.deleteFile(file)
 
         val scale = quality.getScaleString()
-        val cmdArray = mutableListOf("-noautorotate", "-i", path, "-vcodec", "h264", "-crf", "24", "-movflags", "+faststart", "-vf", "scale=$scale:-2", "-preset:v", "ultrafast")
+
+        List<String> initialCommandArray=command.split(" ")
+
+        //val cmdArray = mutableListOf("-noautorotate", "-i", path, "-vcodec", "h264", "-crf", "24", "-movflags", "+faststart", "-vf", "scale=$scale:-2", "-preset:v", "ultrafast")
+
+        val cmdArray = mutableListOf( "-i", path)
+        cmdArray.addAll(initialCommandArray)
 
         // Add high bitrate for the highest quality
 //        if (quality.isHighQuality()) {
